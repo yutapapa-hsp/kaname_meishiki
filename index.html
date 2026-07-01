@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日干タイプ診断｜占わない四柱推命 かなめ</title>
+<meta name="description" content="生年月日だけで、自分の「日干タイプ」がわかる無料診断。当てない・煽らない・開運させない。性格じゃなく、構造で読む占わない四柱推命。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="日干タイプ診断｜占わない四柱推命 かなめ">
+<meta property="og:description" content="生年月日だけで、自分の「素材（日干タイプ）」がわかる無料診断。性格じゃなく、構造で読む。">
+<!-- ▼ デプロイ後、（Vercelのドメイン）を実URLに差し替える（例：kaname-meishiki.vercel.app）▼ -->
+<meta property="og:url" content="https://（Vercelのドメイン）/">
+<meta property="og:image" content="https://（Vercelのドメイン）/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="日干タイプ診断｜占わない四柱推命 かなめ">
+<meta name="twitter:description" content="生年月日だけで、自分の「素材（日干タイプ）」がわかる無料診断。">
+<meta name="twitter:image" content="https://（Vercelのドメイン）/ogp.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --bg:#0E1A24; --surface:#172631; --surface2:#13212B;
+    --ink:#F4ECD8; --muted:#B8A97F; --line:rgba(203,167,90,.34);
+    --accent:#CBA75A; --accent2:#E7CE8E; --accent-line:#9C7C30; --accent-soft:rgba(203,167,90,.12);
+    --ai:#4C6B7A;
+    --serif:'Noto Serif JP',serif; --sans:'Noto Sans JP',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{color:var(--ink);font-family:var(--sans);line-height:1.9;
+    -webkit-font-smoothing:antialiased;padding:0 20px;
+    background:radial-gradient(140% 115% at 50% -10%, #1C3040 0%, #0E1A24 52%, #07111A 100%) fixed;}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{max-width:680px;margin:0 auto;padding:64px 0 96px;position:relative;z-index:1}
+  .serif{font-family:var(--serif)}
+  .en{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:16px}
+  .kicker{display:flex;align-items:center;justify-content:center;gap:16px;
+    font-family:var(--serif);font-size:13px;letter-spacing:.24em;color:var(--accent);
+    text-align:center;margin-bottom:22px}
+  .kicker::before,.kicker::after{content:"";height:1px;width:44px;background:var(--accent-line);opacity:.8}
+  h1.title{font-family:var(--serif);font-weight:600;font-size:40px;
+    text-align:center;line-height:1.45;letter-spacing:.08em;
+    background:linear-gradient(180deg,#F1DFA6 0%,#CBA75A 55%,#A9842E 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#CBA75A}
+  @media(max-width:560px){h1.title{font-size:29px}}
+  .lead{text-align:center;color:var(--muted);font-size:15px;margin-top:22px;line-height:1.95}
+  .note-min{max-width:520px;margin:30px auto 0;font-size:12.5px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--line);border-radius:12px;
+    padding:14px 18px;line-height:1.7;text-align:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--sans);font-weight:500;font-size:15px;cursor:pointer;
+    border-radius:999px;padding:15px 40px;border:1px solid transparent;transition:.2s;text-decoration:none}
+  .btn-primary{background:linear-gradient(180deg,#E7CE8E 0%,#CBA75A 100%);color:#20180A;letter-spacing:.08em;
+    box-shadow:0 6px 24px rgba(0,0,0,.4),0 0 0 1px rgba(203,167,90,.3)}
+  .btn-primary:hover{background:linear-gradient(180deg,#F0DBA0 0%,#D6B96C 100%);transform:translateY(-2px);
+    box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 20px rgba(203,167,90,.25)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{background:var(--surface);border-color:var(--accent)}
+  .btn.disabled{opacity:.5;pointer-events:none}
+  .center{text-align:center}
+  .mt40{margin-top:40px}.mt28{margin-top:28px}.mt20{margin-top:20px}
+
+  /* 生年月日入力 */
+  .birth-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:36px 28px;text-align:center;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both}
+  .birth-card .bh{font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px}
+  .birth-card .bs{font-size:13px;color:var(--muted);margin-bottom:26px}
+  .selrow{display:flex;gap:12px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
+  .selrow .field{display:flex;flex-direction:column;align-items:center}
+  .selrow label{font-size:11px;color:var(--accent);margin-bottom:6px;letter-spacing:.1em}
+  select{font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;
+    background:var(--surface2);color:var(--ink);font-family:var(--sans);min-width:82px;cursor:pointer}
+  select:focus{outline:none;border-color:var(--accent)}
+  .err{color:#D8A99C;font-size:13px;margin-top:16px;display:none}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+  #intro,#result{animation:fadeUp .6s cubic-bezier(.2,.7,.2,1) both}
+
+  /* 結果カード */
+  .res-card{position:relative;overflow:hidden;border:1px solid rgba(203,167,90,.42);border-radius:20px;
+    padding:48px 40px;text-align:center;
+    background:linear-gradient(180deg,#1A2A37 0%,#12202A 100%);
+    box-shadow:0 24px 64px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04)}
+  .res-card::before{content:"";position:absolute;inset:11px;border:1px solid rgba(203,167,90,.22);
+    border-radius:14px;pointer-events:none;z-index:0}
+  .res-card>*{position:relative;z-index:1}
+  .res-watermark{position:absolute;z-index:0;top:50%;left:50%;transform:translate(-50%,-58%);
+    font-family:var(--serif);font-weight:600;font-size:230px;line-height:1;
+    color:rgba(203,167,90,.07);white-space:nowrap;pointer-events:none}
+  .res-system{font-family:var(--serif);font-size:14px;letter-spacing:.12em;color:var(--accent)}
+  .res-name{font-family:var(--serif);font-weight:600;font-size:40px;color:var(--ink);margin-top:8px;letter-spacing:.03em}
+  @media(max-width:560px){.res-card{padding:36px 22px}.res-name{font-size:29px}.res-watermark{font-size:150px}}
+  .res-tag{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--accent);
+    background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:999px;padding:7px 20px}
+  .res-kan{font-family:var(--serif);font-weight:500;font-size:19px;color:var(--accent);
+    margin-top:16px;letter-spacing:.05em}
+  @media(max-width:560px){.res-kan{font-size:17px}}
+  .res-axes{font-size:12.5px;color:var(--muted);margin-top:8px;letter-spacing:.03em}
+  .sec{text-align:left;margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
+  .sec:first-of-type{border-top:none;margin-top:28px;padding-top:0}
+  .sec h3{font-family:var(--serif);font-weight:500;font-size:16px;color:var(--accent);
+    margin-bottom:10px;display:flex;align-items:center;gap:9px;letter-spacing:.04em}
+  .sec h3 .dot{width:16px;height:1.5px;background:var(--accent);display:inline-block}
+  .sec p{font-size:15px;color:var(--ink);line-height:1.95}
+  .res-step{text-align:left;margin-top:30px;background:var(--accent-soft);
+    border:1px solid var(--accent-line);border-radius:14px;padding:20px 22px}
+  .res-step .sh{font-family:var(--serif);font-weight:500;font-size:15px;color:var(--accent);
+    letter-spacing:.06em;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .res-step .sh::before{content:"→";color:var(--accent);font-weight:700}
+  .res-step p:not(.sh){font-size:15px;color:var(--ink);line-height:1.95}
+
+  .cta{margin-top:36px}
+  .cta-bridge{text-align:center;font-family:var(--serif);font-size:15px;color:var(--accent);
+    letter-spacing:.1em;margin:6px 0 18px}
+  .cta-bridge::after{content:"";display:block;width:38px;height:1px;background:var(--accent-line);opacity:.7;margin:14px auto 0}
+  .cta-main{background:#14222C;border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+    text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .cta-eyebrow{display:inline-block;font-family:var(--serif);font-size:12px;letter-spacing:.1em;
+    color:var(--accent);border:1px solid var(--accent-line);border-radius:999px;
+    padding:6px 18px;background:var(--accent-soft);margin-bottom:18px}
+  .cta-main .h{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--ink);line-height:1.55}
+  .cta-main .p{font-size:14px;color:var(--muted);margin-top:14px;line-height:1.85}
+  .cta-main .p b{color:var(--ink);font-weight:600}
+  .cta-teaser{font-family:var(--serif);font-size:15.5px;color:var(--ink);line-height:1.75;
+    margin:20px auto 0;max-width:30em;text-align:left;padding:14px 18px;
+    border-left:2px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0}
+  .cta-listhead{font-family:var(--serif);font-size:13px;color:var(--accent);letter-spacing:.08em;text-align:center;margin-top:24px}
+  .cta-list{list-style:none;text-align:left;max-width:30em;margin:12px auto 0;display:grid;gap:11px}
+  .cta-list li{position:relative;padding-left:27px;font-size:14px;color:var(--ink);line-height:1.7}
+  .cta-list li::before{content:"—";position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
+  .cta-go{margin-top:6px;width:100%;max-width:400px}
+  .cta-meta{font-size:12px;color:var(--muted);margin-top:13px;letter-spacing:.03em}
+
+  .share-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .disc{max-width:560px;margin:34px auto 0;font-size:12px;color:var(--muted);line-height:1.7;
+    text-align:center;border-top:1px solid var(--line);padding-top:22px}
+  .sign{text-align:center;margin-top:36px;font-family:var(--serif);color:var(--muted);font-size:13px;letter-spacing:.1em}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- イントロ -->
+  <section id="intro">
+    <p class="en">◆　Meishiki Type　◆</p>
+    <p class="kicker">占わない四柱推命</p>
+    <h1 class="title">日干タイプ診断</h1>
+    <p class="lead">生年月日を入れると、自分が「どんな素材でできているか」がわかります。<br>
+      当てない・煽らない・開運させない。性格じゃなく、構造で読む診断です。</p>
+    <div class="center mt40">
+      <button class="btn btn-primary" onclick="toBirth()">診断をはじめる</button>
+    </div>
+    <p class="note-min">生まれた時間は聞きません。生年月日だけで確定する「日干（自分の核）」を読みます。<br>
+      これは運勢占いではなく、自分の傾向を知るための「ものの見方のひとつ」です。</p>
+  </section>
+
+  <!-- 生年月日入力 -->
+  <section id="birth" class="hidden">
+    <div class="birth-card">
+      <p class="bh serif">生年月日を選んでください</p>
+      <p class="bs">生まれた日から、あなたの「素材（日干タイプ）」が決まります。</p>
+      <div class="selrow">
+        <div class="field"><label>年</label><select id="y"></select></div>
+        <div class="field"><label>月</label><select id="m"></select></div>
+        <div class="field"><label>日</label><select id="d"></select></div>
+      </div>
+      <div class="center mt28">
+        <button class="btn btn-primary" onclick="judge()">自分のタイプを見る</button>
+      </div>
+      <p class="err" id="err">生年月日を選んでください。</p>
+    </div>
+  </section>
+
+  <!-- 結果 -->
+  <section id="result" class="hidden">
+    <div class="res-card" id="resCard">
+      <div class="res-watermark" id="rWmark"></div>
+      <p class="en">◆　Your Type　◆</p>
+      <p class="res-system">あなたの日干タイプは</p>
+      <p class="res-name serif" id="rName"></p>
+      <span class="res-tag" id="rOne"></span>
+      <p class="res-kan serif" id="rKan"></p>
+      <p class="res-axes" id="rAxes"></p>
+
+      <div class="sec"><h3><span class="dot"></span>あなたの素材</h3><p id="rTale"></p></div>
+      <div class="sec"><h3><span class="dot"></span>あなたの才能</h3><p id="rTalent"></p></div>
+      <div class="sec"><h3><span class="dot"></span>消耗するとき</h3><p id="rTired"></p></div>
+      <div class="sec"><h3><span class="dot"></span>扱い方・立て直し</h3><p id="rRecover"></p></div>
+      <div class="sec"><h3><span class="dot"></span>活きる場所</h3><p id="rEnv"></p></div>
+      <div class="res-step"><p class="sh serif">今日、踏み出せる一歩</p><p id="rStep"></p></div>
+    </div>
+
+    <div class="cta">
+      <p class="cta-bridge serif">ここからが、本編です。</p>
+      <div class="cta-main">
+        <p class="cta-eyebrow" id="ctaEyebrow"></p>
+        <p class="h">「どんな素材か」の先にある、<br>「どう活かすか」の設計図。</p>
+        <p class="p">この診断でわかったのは、自分が"どんな素材か"まで。<br>
+          でも本当に知りたいのは、それを<b>どう活かして、どう働くか</b>のはずです。</p>
+        <p class="cta-teaser" id="ctaTeaser"></p>
+        <p class="cta-listhead">完全ガイドで渡すもの</p>
+        <ul class="cta-list">
+          <li><span id="ctaListName"></span>の、本当の活かし方（10タイプ別）</li>
+          <li>才能の「出方」（通変星）との掛け合わせ</li>
+          <li>消耗しない働き方と、自分に合った回復の設計</li>
+          <li>そして「いつ動くか」――動くタイミングの読み方</li>
+        </ul>
+        <div class="mt20"><a class="btn btn-primary cta-go" id="ctaNote" href="#" target="_blank" rel="noopener">命式で読む「適職」設計図（note）</a></div>
+        <p class="cta-meta" id="ctaMeta">note ／ 買い切り・追記でずっと更新中</p>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <button class="btn btn-ghost" onclick="saveImage()">結果を画像で保存</button>
+      <button class="btn btn-ghost" onclick="restart()">別の生年月日で調べる</button>
+    </div>
+
+    <p class="disc">この診断は、生年月日から「日干（自分の核）」を構造的に算出するものです。<br>
+      医学的・科学的な分類や、運勢占いではありません。自分の傾向を知るための「ものの見方のひとつ」です。</p>
+    <p class="sign">日干タイプ診断 ｜ かなめ</p>
+  </section>
+
+</div>
+
+<script>
+/* ===== 差し替え用URL（公開後にここを書き換える） ===== */
+var NOTE_URL = '（有料noteのURL｜公開後に差し替え）';
+var SUB_URL  = '（Substack URL｜開設後に差し替え）';
+
+/* ===== 日干計算（2000-01-01=戊午 / 1990-01-01=丙寅 で検証済み） ===== */
+function jdn(y,m,d){ var a=Math.floor((14-m)/12), yy=y+4800-a, mm=m+12*a-3;
+  return d + Math.floor((153*mm+2)/5) + 365*yy + Math.floor(yy/4) - Math.floor(yy/100) + Math.floor(yy/400) - 32045; }
+function nikkanIndex(y,m,d){ return ((jdn(y,m,d)+9)%10+10)%10; } // 0=甲…9=癸
+
+/* ===== 10タイプ・データ（note本文と一致） ===== */
+var TYPES = [
+ {wm:'樹',name:'大樹タイプ',axes:'日干 甲（きのえ）｜木の"陽"　/　ゾーン A・開拓・牽引',one:'まっすぐ伸びる、大きな樹',
+  tale:'天に向かって、まっすぐ伸びる大きな一本の樹。横に這ったり、風になびいて曲がったりするのは苦手です。ただ上へ、上へと伸びていく——その一本、芯の通ったまっすぐさが、そのままあなたの核になっています。',
+  talent:'あなたの価値は「まっすぐさ」と「面倒見のよさ」。大樹は、自分が高く伸びることで、後から来る人の日除けを作ります。筋の通った信念を掲げて人を引っ張るほど、力が出る人。その堂々とした姿に、人は安心してついてきます。',
+  tired:'筋の通らないことや、なあなあで流される空気に、人一倍ストレスを感じます。曲げること・媚びること・空気に合わせて自分を小さくすること——これが、あなたにとっていちばんの消耗の原因です。頑固さを、責める必要はありません。',
+  recover:'小さくまとまろうとしないでください。合わない場所で消耗するより、まっすぐ伸びられる場所を選ぶ。そして、後輩や年下の相談に乗る。あなたが堂々と伸びていること自体が、そのまま、まわりへの貢献になります。',
+  env:'リーダー・管理職・番頭役／教育・指導・育成／独立や自分の看板／理念・方針・ルールなど組織の「軸」を立てる役。まっすぐな信念を掲げられる場所で、いちばん活きます。',
+  step:'今日、飲み込んでいた自分の意見を、会議やチャットで一つだけ、最初に言い切ってみる。「叩き台として言いますが」と前置きすれば、十分です。',
+  hook:'曲げなくていい。まっすぐ伸びること自体が、あなたの価値です。'},
+ {wm:'花',name:'草花タイプ',axes:'日干 乙（きのと）｜木の"陰"　/　ゾーン B・育成・調整',one:'しなやかに絡んで伸びる草花',
+  tale:'地を這い、何かに絡みながら、しなやかに伸びる草花・つる草。まっすぐ一本で立つことには、こだわりません。風が吹けばしなって受け流し、壁があれば絡んで伸びる——その「したたかな柔らかさ」が、あなたの核です。',
+  talent:'あなたの価値は「適応力」と「人に添う力」。草花は一本では弱くても、絡む相手（人・組織・仕組み）を選べば、どこまでも伸びます。良い幹の隣で花を咲かせる——一人で気張るより、それがあなたの勝ち筋です。',
+  tired:'その場その場で人に合わせられるぶん、気づけば「自分がどうしたいか」を見失いがちです。断れずに引き受けて一人で抱える、無理に我を張って孤立する——それが、あなたのつらさの正体です。',
+  recover:'「誰と組むか」を、仕事の内容より先に見てください。絡む相手で、あなたの伸び方は決まります。そして、小さな「NO」を一日ひとつ言う練習を。全部を受けないことが、自分を取り戻す一歩になります。',
+  env:'調整・渉外・カスタマー対応／No.2・参謀・秘書的ポジション／信頼構築型の接客・営業／チームやコミュニティの潤滑油。強い幹に添って、実力を発揮します。',
+  step:'今日、本当は断りたかった一件に、小さく「それは難しいです」と一つだけ言ってみる。全部でなくていい、一つで十分です。',
+  hook:'誰と組むかで、伸び方が決まる。その柔らかさは、武器です。'},
+ {wm:'日',name:'太陽タイプ',axes:'日干 丙（ひのえ）｜火の"陽"　/　ゾーン A・開拓・牽引',one:'分け隔てなく照らす太陽',
+  tale:'相手を選ばず、好きな人にも嫌いな人にも、分け隔てなく光を注ぐ太陽。明るくて裏表がなく、あなたがいるだけで、場が温かくなります。隠れていては意味がない——人の前に出てこそ輝く素材です。',
+  talent:'あなたの価値は「明るさ」と「見られる力」。太陽は、人の前に出てこそ価値になります。あなたが明るくそこにいるだけで、人は集まり、安心する。それは、誰にでもできることではありません。',
+  tired:'地味な作業をコツコツ続ける場面や、誰にも見られない裏方仕事で、静かに削れていきます。閉じた場所・目立たない役回りに長く置かれると、あなたの光は、どんどん曇っていく。飽きっぽさは、根気のなさではありません。',
+  recover:'人に見られる場所・表に立つ役を、自分から取りにいってください。単調な裏方は、得意な人に渡していい。表に出ることは、あなたにとってわがままではなく、役割です。',
+  env:'発信・広報・ブランドの「顔」／営業・接客の花形／講師・イベント・人前に立つ仕事／チームのムードメーカー。見られてこそ、力が出ます。',
+  step:'今日、人に見られる場（発言・発信・自己紹介）に、自分から一歩、前に出てみる。目立つことを、自分に許可してあげてください。',
+  hook:'人に見られる場に立っていい。明るさは、あなたの商品です。'},
+ {wm:'灯',name:'灯火タイプ',axes:'日干 丁（ひのと）｜火の"陰"　/　ゾーン C・専門・探求',one:'一点を繊細に照らす灯火',
+  tale:'暗がりの一点を、繊細に、深く照らす、ろうそくの火・アトリエのランプ。全体をカッと照らすことはしません。その代わり、静かだけれど、内側に強い情熱を抱えています。',
+  talent:'あなたの価値は「一点に注ぐ集中力」と「繊細な情熱」。灯火は、風のない静かな場所に置けば、驚くほど長く、深く燃え続けます。広く浅くではなく、狭く深く——その一点集中は、専門性となって、大きな価値になります。',
+  tired:'気分や環境の影響を受けやすく、調子の波に振り回されます。乗っているときは誰より深く潜れるのに、風（人間関係や騒がしさ）が乱れると、火はすぐ揺らいでしまう。問題は火ではなく、火を置く「場所」です。',
+  recover:'風の強い場所——騒がしく人の出入りが激しい環境から、距離を取ってください。得意な一点に、時間を集中して注ぐ。調子の波は、責めずに記録すると、だんだん乗れるようになります。',
+  env:'専門職・研究・職人／No.2・参謀・分析役／クリエイティブ・ものづくり／大人数より、一対一で深く関わる仕事。',
+  step:'今日、通知を切って、好きな一点に「30分だけ」深く潜る時間を取る。あれこれ手を広げず、一つに絞って。',
+  hook:'静かな場所で一点を深めるほど、あなたは長く、強く燃えます。'},
+ {wm:'山',name:'山タイプ',axes:'日干 戊（つちのえ）｜土の"陽"　/　ゾーン B・育成・調整',one:'動じない大きな山',
+  tale:'何があっても、そこにどっしりと在り続ける、大きな山・広い大地。急ぎません、動きません。その揺るがなさが、まわりに安心を与えます——動かないことそのものが、あなたの価値です。',
+  talent:'あなたの価値は「安定感」と「受けとめる力」。山は動かないからこそ、人が寄りかかれる場所になります。腰を据えて長く取り組むほど、コツコツ積み上げるほど、その揺るがなさは、大きな信頼に変わります。',
+  tired:'変化の速い場所や、次々に方針が変わる環境で消耗します。急にやり方を変えられたり、すぐ結論を迫られたりすると、内側がついていかず、疲れてしまう。腰の重さは、行動の遅さではありません。',
+  recover:'腰を据えて長く取り組める仕事を選んでください。即断を迫られたら、「一度持ち帰ります」でいい——あなたの答えは、時間をかけたほうが正確です。相談される役を引き受けると、それがそのまま価値になります。',
+  env:'管理・運営・組織の柱／不動産・インフラ・長期プロジェクト／相談役・まとめ役／専門を一つ、長く続ける仕事。時間をかけて積むほど、実力になります。',
+  step:'今日、即答を迫られる場面が来たら、「少し考えて、あとでお返事します」と一度持ち帰ってみる。自分のペースを、守っていい。',
+  hook:'速さで勝負しなくていい。続けること自体が、信頼になります。'},
+ {wm:'畑',name:'畑タイプ',axes:'日干 己（つちのと）｜土の"陰"　/　ゾーン B・育成・調整',one:'育てる、やわらかい畑の土',
+  tale:'蒔かれた種を静かに受けとめて育てる、やわらかい畑の土・田園。自分が主役になろうとはしません。目立たず、実りを人に渡す——その「育てる力・受けとめる力」が、あなたの核です。',
+  talent:'あなたの価値は「育てる力」と「地道な現実感覚」。畑は派手ではないけれど、実際に人を食べさせる実りを生みます。教える・育てる・整える・コツコツ積む——その地に足のついた実務力は、時間をかけるほど、確かな信頼になります。',
+  tired:'人の面倒をみられるぶん、気づけば「自分のことは後回し」になります。頼まれると断れず、人の相談を抱え込み、溜め込んだものを一人で消化しようとして、こっそり疲れてしまう。優しさが、空回りしているだけです。',
+  recover:'「自分の実り」を、先に少しだけ確保してください。全部を人に渡さない。受けとめた相談は、一人で溜めずに外に出す。畑も、手入れをされて初めて、豊かに実ります。',
+  env:'教育・人材育成・後進の指導／事務・管理・バックオフィス／ケア・サポート・世話役／食・農・ものを育てる分野。地道な積み上げが、力になります。',
+  step:'今日、人のためでなく「自分のためだけの時間」を、15分だけ先に予定へ入れる。自分を後回しにしない、小さな一歩です。',
+  hook:'育てる力が、あなたの価値。自分を、後回しにしすぎないで。'},
+ {wm:'鉄',name:'鉄タイプ',axes:'日干 庚（かのえ）｜金の"陽"　/　ゾーン A・開拓・牽引',one:'曖昧を断ち切る鉄・鉱石',
+  tale:'曖昧なものを断ち切る、まだ磨かれていない鉄・鉱石・刀の原石。硬くて、強い。なあなあを嫌い、白黒をはっきりさせる。まっすぐで、飾りません——その「断ち切る強さ」が、あなたの核です。',
+  talent:'あなたの価値は「行動力」と「断ち切る決断力」。鉄は、研がれてこそ鋭い刃になります。古いやり方を断つ・停滞を動かす・はっきり決める——その強さは、迷いのある場所ほど、大きな価値になります。',
+  tired:'はっきりものを言えるぶん、「言い方がきつい」「もっと空気を読め」と言われて、自分を持て余しがちです。強さを抑え込むこと、なあなあの現場に居続けること——それが、あなたの消耗の原因です。丸めた瞬間、あなたの強さは消えてしまいます。',
+  recover:'「決める役割」を引き受けてください。そして、強さを人ではなく「課題」に向ける——切る相手を間違えないだけで、評価は変わります。停滞している場に、自分から動きを作っていい。',
+  env:'改革・立て直し・新規開拓／営業・交渉・意思決定／技術・製造・ものづくり／自分の判断で切り込める独立・起業。',
+  step:'今日、なあなあで放置していた一件を、一つだけ「はっきり決める」。決めることが、あなたのいちばんの武器です。',
+  hook:'強さを封じないで。あなたが切り込むと、動き出すものがあります。'},
+ {wm:'宝',name:'宝石タイプ',axes:'日干 辛（かのと）｜金の"陰"　/　ゾーン D・感性・創造',one:'磨くと光る、繊細な宝石',
+  tale:'繊細で、傷つきやすい。雑に扱われれば、すぐ曇る。でも、ていねいに磨かれると、誰より美しく光る——そんな宝石・精密な刃物が、あなたの素材です。傷つきやすいほど、精度が高いという証拠です。',
+  talent:'あなたの価値は「繊細な感性」と「磨き上げる力」。宝石は、丁寧に扱われる場所でこそ、本当の輝きを見せます。細部に気づける・美しさが分かる・妥協しない——その繊細さは、粗い仕事があふれる世の中では、そのまま希少価値になります。',
+  tired:'細かいことに気づいてしまうぶん、「気にしすぎ」「繊細すぎる」と言われがちです。人の一言がずっと胸に残る、雑な扱いや粗い仕事が生理的につらい、完璧にできないと自分を許せない。雑な環境に置かれ続けると、削れていきます。',
+  recover:'雑に扱われる場所から、静かに離れてください。「気にしすぎ」ではなく「よく気づけた」——気づけたことを、強みとして言い換える。そして、量やスピードより「質」で評価される場所を選ぶ。繊細さは、直すものではなく、活かす場所を選ぶものです。',
+  env:'専門技術・品質・検査・校正／美・デザイン・宝飾・美容／分析・リサーチ・繊細な調整／こだわりの「一点物」を作る仕事。質が効く土俵で活きます。',
+  step:'今日、「気にしすぎだ」と自分を責めた瞬間があったら、「いや、よく気づけた」と一度だけ言い換えてみる。あなたの繊細さは、才能です。',
+  hook:'繊細さは、直すものじゃない。活かす場所を、選ぶものです。'},
+ {wm:'河',name:'大河タイプ',axes:'日干 壬（みずのえ）｜水の"陽"　/　ゾーン D・感性・創造',one:'止まらず流れる大河・海',
+  tale:'ひとつの形にとどまらず、岩があれば避け、地形が変われば流れを変える。止まることなく流れ続ける大河・海。スケールが大きく、掴みどころがない——その「自由さと発想の広さ」が、あなたの核です。',
+  talent:'あなたの価値は「発想の広さ」と「流れを動かす力」。水は、動いているときにいちばん澄みます。アイデアを出す・仕組みを設計する・人や物を大きく動かす——そのスケールの大きさは、広い場所でこそ、最大の武器になります。',
+  tired:'決められた枠の中で同じことを繰り返す、細かいルールにきっちり従い続ける——そんな環境に閉じ込められると、水がよどむように、力が濁っていきます。飽きっぽさは、根気のなさではありません。',
+  recover:'枠の狭い仕事は、手放していい。複数のことを並行して回すほうが、あなたは活きます。そして、頭にあるアイデアは、溜め込まずに、その場で外に出す——動かすことで、澄んでいきます。',
+  env:'企画・戦略・プロデュース／貿易・流通・移動の多い仕事／アイデア・発想を売る仕事／一つに縛られず、複数を横断する役。',
+  step:'今日、頭の中にあるアイデアを一つ、その場でメモか発信で「外に出す」。溜めるとよどみます。動かして、澄ませて。',
+  hook:'小さくまとまらなくていい。動き続けることで、澄んでいきます。'},
+ {wm:'雨',name:'雨タイプ',axes:'日干 癸（みずのと）｜水の"陰"　/　ゾーン C・専門・探求',one:'静かに浸みる雨・霧',
+  tale:'音を立てずに、土の奥まで浸みていく、静かに降る雨・朝露・霧。派手さはないけれど、万物を静かに潤します。人の心の機微を、よく感じ取る——その「浸透する感受性」が、あなたの核です。',
+  talent:'あなたの価値は「豊かな感受性」と「想像力」。雨は、目立たなくても、なければ何も育たない。人の機微を汲む・まだ形のないものを想像する・裏側で深く支える——その繊細な知性は、静けさのある場所で光ります。',
+  tired:'人の気持ちや場の空気を感じ取りすぎて、一人で不安や考えごとを抱え込みがちです。言われていないことまで察してしまう、先のことをあれこれ想像して、勝手に疲れる。それは、深く感じ取れる素材の裏返しです。',
+  recover:'感じ取ったものを、書き出して外に出してください。抱え込むと、雨は淀みます。がさつで無神経な環境から距離を取り、静けさのある場所を確保する。想像する力を、そのまま役割にしていい。',
+  env:'研究・学問・分析／企画・リサーチ・想像力を使う仕事／ケア・医療・福祉・カウンセリング／静かに全体を潤す裏方・サポート。',
+  step:'今日、頭の中でぐるぐるしている不安や考えを、紙に「3行だけ」書き出してみる。外に出すと、少し澄みます。',
+  hook:'考えすぎは、欠点じゃない。深く感じ取れる、才能の裏側です。'}
+];
+
+/* ===== プルダウン ===== */
+var $=function(id){return document.getElementById(id);};
+var yS=$('y'), mS=$('m'), dS=$('d');
+(function(){
+  var opt='<option value="">―</option>', s=opt;
+  for(var y=2025;y>=1930;y--) s+='<option value="'+y+'">'+y+'</option>'; yS.innerHTML=s;
+  s=opt; for(var m=1;m<=12;m++) s+='<option value="'+m+'">'+m+'</option>'; mS.innerHTML=s;
+  fillDays();
+})();
+function fillDays(){
+  var y=parseInt(yS.value)||2000, m=parseInt(mS.value)||1, dim=new Date(y,m,0).getDate();
+  var cur=dS.value, s='<option value="">―</option>';
+  for(var d=1;d<=dim;d++) s+='<option value="'+d+'">'+d+'</option>';
+  dS.innerHTML=s; if(cur&&parseInt(cur)<=dim) dS.value=cur;
+}
+yS.addEventListener('change',fillDays); mS.addEventListener('change',fillDays);
+
+/* ===== フロー ===== */
+function toBirth(){ $('intro').classList.add('hidden'); $('birth').classList.remove('hidden'); window.scrollTo({top:0,behavior:'smooth'}); }
+function isURL(u){ return /^https?:\/\//.test(u); }
+
+function judge(){
+  var y=parseInt(yS.value), m=parseInt(mS.value), d=parseInt(dS.value);
+  if(!y||!m||!d){ $('err').style.display='block'; return; }
+  $('err').style.display='none';
+  var t=TYPES[nikkanIndex(y,m,d)];
+  $('rWmark').textContent=t.wm;
+  $('rName').textContent=t.name;
+  $('rOne').textContent=t.one;
+  var ax=t.axes.split('/');
+  $('rKan').textContent=(ax[0]||'').trim();
+  $('rAxes').textContent=ax[1]?ax[1].trim():'';
+  $('rTale').textContent=t.tale;
+  $('rTalent').textContent=t.talent;
+  $('rTired').textContent=t.tired;
+  $('rRecover').textContent=t.recover;
+  $('rEnv').textContent=t.env;
+  $('rStep').textContent=t.step;
+  $('ctaEyebrow').textContent=t.name+' の取扱説明書';
+  $('ctaTeaser').textContent=t.hook;
+  $('ctaListName').textContent=t.name;
+  var nb=$('ctaNote'), meta=$('ctaMeta');
+  if(isURL(NOTE_URL)){ nb.href=NOTE_URL; nb.classList.remove('disabled'); meta.textContent='note ／ 買い切り・追記でずっと更新中'; }
+  else{ nb.href='#'; nb.classList.add('disabled'); meta.textContent='（公開後にnoteのリンクを差し込みます）'; }
+  $('birth').classList.add('hidden');
+  $('result').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){ $('result').classList.add('hidden'); $('birth').classList.remove('hidden'); window.scrollTo({top:0,behavior:'smooth'}); }
+function saveImage(){
+  html2canvas($('resCard'),{backgroundColor:'#14232F',scale:2}).then(function(canvas){
+    var a=document.createElement('a'); a.download='日干タイプ診断_結果.png'; a.href=canvas.toDataURL('image/png'); a.click();
+  });
+}
+</script>
+</body>
+</html>
