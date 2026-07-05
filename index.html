@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日干タイプ診断｜占わない四柱推命 かなめ</title>
-<meta name="description" content="生年月日だけで、自分の「日干タイプ」がわかる無料診断。当てない・煽らない・開運させない。性格じゃなく、構造で読む占わない四柱推命。">
+<meta name="description" content="生年月日だけで、自分の「日干タイプ」と才能の「出方」・「勢い」がわかる無料診断。当てない・煽らない・開運させない。性格じゃなく、構造で読む占わない四柱推命。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="日干タイプ診断｜占わない四柱推命 かなめ">
-<meta property="og:description" content="生年月日だけで、自分の「素材（日干タイプ）」がわかる無料診断。性格じゃなく、構造で読む。">
+<meta property="og:description" content="生年月日だけで、自分の「素材（日干タイプ）」と才能の「出方」がわかる無料診断。性格じゃなく、構造で読む。">
 <!-- OGP/URLは https://kaname-meishiki.vercel.app に設定済（2026-07-01デプロイ）。ドメイン変更時はここ4箇所を差し替える -->
 <meta property="og:url" content="https://kaname-meishiki.vercel.app/">
 <meta property="og:image" content="https://kaname-meishiki.vercel.app/ogp.png">
@@ -143,6 +143,7 @@
   .disc{max-width:560px;margin:34px auto 0;font-size:12px;color:var(--muted);line-height:1.7;
     text-align:center;border-top:1px solid var(--line);padding-top:22px}
   .sign{text-align:center;margin-top:36px;font-family:var(--serif);color:var(--muted);font-size:13px;letter-spacing:.1em}
+  .starnote{font-size:12px;color:var(--muted);display:inline-block;margin-top:5px;line-height:1.7}
   .hidden{display:none}
 </style>
 </head>
@@ -154,7 +155,7 @@
     <p class="en">◆　Meishiki Type　◆</p>
     <p class="kicker">占わない四柱推命</p>
     <h1 class="title">日干タイプ診断</h1>
-    <p class="lead">生年月日を入れると、自分が「どんな素材でできているか」がわかります。<br>
+    <p class="lead">生年月日を入れると、自分が「どんな素材でできているか」に加えて、<br>才能の「出方」と「勢い」までわかります。<br>
       当てない・煽らない・開運させない。性格じゃなく、構造で読む診断です。</p>
     <div class="center mt40">
       <button class="btn btn-primary" onclick="toBirth()">診断をはじめる</button>
@@ -196,6 +197,8 @@
       <div class="sec"><h3><span class="dot"></span>消耗するとき</h3><p id="rTired"></p></div>
       <div class="sec"><h3><span class="dot"></span>扱い方・立て直し</h3><p id="rRecover"></p></div>
       <div class="sec"><h3><span class="dot"></span>活きる場所</h3><p id="rEnv"></p></div>
+      <div class="sec"><h3><span class="dot"></span>才能の「出方」（通変星）</h3><p id="rDir"></p></div>
+      <div class="sec"><h3><span class="dot"></span>勢い・ペース配分（十二運）</h3><p id="rMom"></p></div>
       <div class="res-step"><p class="sh serif">今日、踏み出せる一歩</p><p id="rStep"></p></div>
     </div>
 
@@ -210,7 +213,7 @@
         <p class="cta-listhead">完全ガイドで渡すもの</p>
         <ul class="cta-list">
           <li><span id="ctaListName"></span>の、本当の活かし方（10タイプ別）</li>
-          <li>才能の「出方」（通変星）との掛け合わせ</li>
+          <li>いま出た「出方（通変星）」と素材の、掛け合わせの読み方</li>
           <li>消耗しない働き方と、自分に合った回復の設計</li>
           <li>そして「いつ動くか」――動くタイミングの読み方</li>
         </ul>
@@ -225,7 +228,7 @@
     </div>
 
     <p class="disc">この診断は、生年月日から「日干（自分の核）」を構造的に算出するものです。<br>
-      医学的・科学的な分類や、運勢占いではありません。自分の傾向を知るための「ものの見方のひとつ」です。</p>
+      医学的・科学的な分類や、運勢占いではありません。自分の傾向を知るための「ものの見方のひとつ」です。<br>※「出方（通変星）」「勢い（十二運）」も生年月日だけで算出しています。節入り（月の切り替わり）当日の生まれは、「出方」が前後の月にずれることがあります。</p>
     <p class="sign">日干タイプ診断 ｜ かなめ</p>
   </section>
 
@@ -240,6 +243,70 @@ var SUB_URL  = '（Substack URL｜開設後に差し替え）';
 function jdn(y,m,d){ var a=Math.floor((14-m)/12), yy=y+4800-a, mm=m+12*a-3;
   return d + Math.floor((153*mm+2)/5) + 365*yy + Math.floor(yy/4) - Math.floor(yy/100) + Math.floor(yy/400) - 32045; }
 function nikkanIndex(y,m,d){ return ((jdn(y,m,d)+9)%10+10)%10; } // 0=甲…9=癸
+
+/* ===== 月柱・通変星・十二運（生年月日のみ／時柱は使わない） =====
+   節入りは近似式（1930-2100対応・誤差±1日程度）。当日生まれには注記を出す。 */
+var STEM_ELEM=[0,0,1,1,2,2,3,3,4,4]; // 甲乙=木 丙丁=火 戊己=土 庚辛=金 壬癸=水
+var HIDDEN=[9,5,0,1,4,2,3,5,6,7,4,8]; // 支の本気蔵干：子癸 丑己 寅甲 卯乙 辰戊 巳丙 午丁 未己 申庚 酉辛 戌戊 亥壬
+function setsuDay(y,m){ // 月mの「節」が入る日（小寒/立春/啓蟄/清明/立夏/芒種/小暑/立秋/白露/寒露/立冬/大雪）
+  var C20=[6.11,4.6295,6.318,5.59,6.318,6.5,7.928,8.35,8.44,9.098,8.218,7.9];
+  var C21=[5.4055,3.87,5.63,4.81,5.52,5.678,7.108,7.5,7.646,8.318,7.438,7.18];
+  var Y,C;
+  if(y>=2001){ Y=y-2000; C=C21[m-1]; } else { Y=y-1900; C=C20[m-1]; }
+  var L=(m<=2)?Math.floor((Y-1)/4):Math.floor(Y/4);
+  return Math.floor(Y*0.2422+C)-L;
+}
+function pillars(y,m,d){
+  var sd=setsuDay(y,m);
+  var mi=(d>=sd)?((m-2+12)%12):((m-3+12)%12); // 節月：寅=0…丑=11
+  var yy=y; if(m<2||(m===2&&d<setsuDay(y,2))) yy=y-1; // 年柱は立春で切替
+  var ys=((yy-4)%10+10)%10;
+  return { ys:ys,
+    mStem:(((ys%5)*2+2)+mi)%10,          // 五虎遁
+    mBranch:(2+mi)%12,                    // 0=子
+    dayStem:nikkanIndex(y,m,d),
+    dayBranch:((jdn(y,m,d)+49)%12+12)%12, // 0=子（2000-01-01=午で検証）
+    nearSetsu:(d===sd) };
+}
+function tsuhen(dayStem,other){
+  var de=STEM_ELEM[dayStem], oe=STEM_ELEM[other];
+  var same=((dayStem%2)===(other%2));
+  var cat;
+  if(de===oe) cat=0;                 // 同じ五行 → 自分を立てる
+  else if((de+1)%5===oe) cat=1;      // 我生 → 生み出す・表現する
+  else if((de+2)%5===oe) cat=2;      // 我剋 → 現実を回す・稼ぐ
+  else if((oe+2)%5===de) cat=3;      // 剋我 → 任される・律する
+  else cat=4;                        // 生我 → 受け取る・学ぶ
+  var N=[['比肩','ひけん'],['劫財','ごうざい'],['食神','しょくじん'],['傷官','しょうかん'],
+         ['偏財','へんざい'],['正財','せいざい'],['偏官','へんかん'],['正官','せいかん'],
+         ['偏印','へんいん'],['印綬','いんじゅ']];
+  var e=N[cat*2+(same?0:1)];
+  return {cat:cat,name:e[0],yomi:e[1]};
+}
+var DIRS=[
+ {tag:'①',name:'自分を立てる',sub:'独立・マイペース',desc:'自分の軸で動くとき、力が出る出方です。人に合わせるより、自分の裁量がある場所で活きます。'},
+ {tag:'②',name:'生み出す・表現する',sub:'アウトプット・創造',desc:'内側にあるものを外に出すとき、力が出る出方です。作る・書く・話す——アウトプットの場を持つと、いきいきします。'},
+ {tag:'③',name:'現実を回す・稼ぐ',sub:'お金・段取り・人付き合い',desc:'現実を扱い、回すとき、力が出る出方です。お金の感覚・段取り・人との距離感に強く、実務で活きます。'},
+ {tag:'④',name:'任される・律する',sub:'責任・立場・組織',desc:'役割を任されたとき、力が出る出方です。責任ある立場・決まりのある場所で、信頼を積み上げます。'},
+ {tag:'⑤',name:'受け取る・学ぶ',sub:'知識・吸収・支えられる',desc:'学び、蓄えるとき、力が出る出方です。知識や専門性を扱う場所で、静かに強くなります。'}];
+var JUNIUN=[
+ {n:'長生',y:'ちょうせい',g:'育っていく勢い',t:'素直に吸収して、すくすく伸びる型です。学びながら進むほど、安定して強くなります。'},
+ {n:'沐浴',y:'もくよく',g:'育っていく勢い',t:'揺れながら自分を探す型です。感受性が強く、変化や新しい刺激の中で磨かれます。'},
+ {n:'冠帯',y:'かんたい',g:'前に出る勢い',t:'表舞台に出はじめる型です。若々しい推進力があり、場数を踏むほど輝きます。'},
+ {n:'建禄',y:'けんろく',g:'前に出る勢い',t:'地に足のついた充実の型です。堅実に積み上げる持久力があり、コツコツがそのまま実ります。'},
+ {n:'帝旺',y:'ていおう',g:'前に出る勢い',t:'12段階の頂点にあたる、押しの強い型です。自分で決めて、自分で引っ張るときに活きます。'},
+ {n:'衰',y:'すい',g:'静かに深い勢い',t:'成熟して落ち着く型です。無理をしない安定感と、まわりを見守る余裕が持ち味です。'},
+ {n:'病',y:'びょう',g:'静かに深い勢い',t:'内側に向かう型です。想像力と共感力が深く、人の機微を感じ取る場面で活きます。'},
+ {n:'死',y:'し',g:'静かに深い勢い',t:'名前は物騒ですが、悪い星ではありません。一点に沈み込む集中と、専門性の型です。'},
+ {n:'墓',y:'ぼ',g:'静かに深い勢い',t:'蓄えて守る型です。コツコツ貯める力があり、研究・管理・継続で強さを発揮します。'},
+ {n:'絶',y:'ぜつ',g:'静かに深い勢い',t:'切り替えの身軽さを持つ型です。ゼロから始め直せる瞬発力があり、変化の場面で活きます。'},
+ {n:'胎',y:'たい',g:'育っていく勢い',t:'芽生える前の、可能性を宿す型です。新しい環境や物事に馴染むのが早い柔らかさがあります。'},
+ {n:'養',y:'よう',g:'育っていく勢い',t:'育てられて育つ、穏やかな型です。人に恵まれやすく、支え合いの中で力が出ます。'}];
+function juniun(dayStem,branch){
+  var START={0:11,2:2,4:2,6:5,8:8,1:6,3:9,5:9,7:0,9:3}; // 陽干=長生の支から順行／陰干=逆行
+  var s=START[dayStem];
+  return JUNIUN[(dayStem%2===0)?((branch-s+12)%12):((s-branch+12)%12)];
+}
 
 /* ===== 10タイプ・データ（note本文と一致） ===== */
 var TYPES = [
@@ -362,6 +429,20 @@ function judge(){
   $('rTired').textContent=t.tired;
   $('rRecover').textContent=t.recover;
   $('rEnv').textContent=t.env;
+  var P=pillars(y,m,d);
+  var mainS=tsuhen(P.dayStem,HIDDEN[P.mBranch]), subS=tsuhen(P.dayStem,P.mStem);
+  var md=DIRS[mainS.cat], sd2=DIRS[subS.cat];
+  var dirHtml='あなたの才能は、<b>'+md.tag+'「'+md.name+'」方向（'+md.sub+'）</b>に出やすい構造です。'+md.desc
+    +'<br><span class="starnote">命式の中心（月柱）にある星＝'+mainS.name+'（'+mainS.yomi+'）</span>';
+  if(subS.cat!==mainS.cat){
+    dirHtml+='<br>サブの出方は<b>'+sd2.tag+'「'+sd2.name+'」方向</b>（星＝'+subS.name+'〔'+subS.yomi+'〕）。出方が2本立ての人も、普通にいます。';
+  }
+  if(P.nearSetsu){
+    dirHtml+='<br><span class="starnote">※節入り（月の切り替わり）当日の生まれのため、「出方」は前後の月にずれる可能性があります。</span>';
+  }
+  $('rDir').innerHTML=dirHtml;
+  var jj=juniun(P.dayStem,P.dayBranch);
+  $('rMom').innerHTML='<b>'+jj.n+'（'+jj.y+'）</b>｜'+jj.g+'。'+jj.t;
   $('rStep').textContent=t.step;
   $('ctaEyebrow').textContent=t.name+' の取扱説明書';
   $('ctaTeaser').textContent=t.hook;
