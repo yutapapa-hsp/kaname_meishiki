@@ -145,9 +145,136 @@
   .sign{text-align:center;margin-top:36px;font-family:var(--serif);color:var(--muted);font-size:13px;letter-spacing:.1em}
   .starnote{font-size:12px;color:var(--muted);display:inline-block;margin-top:5px;line-height:1.7}
   .hidden{display:none}
+
+  /* ===== 2026-07-17 visual refresh =====
+     すばるの「背景に世界観／本文は静かなパネル」という骨格だけを借り、
+     かなめは命式盤・金の罫線・墨の山並みで固有化する。色は従来の濃紺×金を維持。 */
+  body{padding:0 18px;position:relative;overflow-x:hidden;
+    background:
+      radial-gradient(44% 32% at 86% 11%,rgba(231,206,142,.16) 0%,rgba(203,167,90,.045) 48%,transparent 74%),
+      radial-gradient(72% 50% at 12% 78%,rgba(76,107,122,.22) 0%,transparent 72%),
+      linear-gradient(180deg,#07131C 0%,#0E1A24 34%,#132533 70%,#1A3140 100%) fixed}
+  body::before{opacity:.07;mix-blend-mode:screen}
+  .kaname-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.23;
+    background-image:
+      linear-gradient(rgba(203,167,90,.12) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(203,167,90,.12) 1px,transparent 1px);
+    background-size:72px 72px;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.12) 78%,transparent);
+    mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.12) 78%,transparent)}
+  .kaname-grid::before,.kaname-grid::after{content:"";position:absolute;inset:0}
+  .kaname-grid::before{background:linear-gradient(112deg,transparent 0 47.8%,rgba(203,167,90,.13) 48%,transparent 48.2% 100%)}
+  .kaname-grid::after{background:linear-gradient(68deg,transparent 0 47.8%,rgba(203,167,90,.09) 48%,transparent 48.2% 100%)}
+  .kaname-disc{position:fixed;right:42px;top:38px;width:286px;height:286px;border-radius:50%;z-index:0;pointer-events:none;
+    border:1px solid rgba(231,206,142,.48);
+    background:
+      repeating-conic-gradient(from -9deg,rgba(231,206,142,.32) 0 .45deg,transparent .45deg 36deg),
+      radial-gradient(circle,transparent 0 31%,rgba(203,167,90,.18) 31.4% 31.8%,transparent 32.2% 56%,rgba(203,167,90,.22) 56.4% 56.8%,transparent 57.2%),
+      radial-gradient(circle at 42% 35%,rgba(244,236,216,.12),rgba(203,167,90,.035) 52%,transparent 72%);
+    box-shadow:0 0 70px 20px rgba(203,167,90,.09),inset 0 0 55px rgba(203,167,90,.05);
+    animation:discBreathe 9s ease-in-out infinite}
+  .kaname-disc::before{content:"命";position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--serif);font-size:88px;font-weight:500;color:rgba(231,206,142,.19);
+    text-shadow:0 0 28px rgba(203,167,90,.13)}
+  .kaname-disc::after{content:"甲　乙　丙　丁　戊\A癸　　　　　　　己\A壬　辛　庚";white-space:pre;
+    position:absolute;inset:-18px;display:grid;place-items:center;text-align:center;
+    font-family:var(--serif);font-size:12px;line-height:9.4;letter-spacing:2.8em;color:rgba(231,206,142,.48)}
+  @keyframes discBreathe{0%,100%{opacity:.72;filter:brightness(.92)}50%{opacity:1;filter:brightness(1.08)}}
+  .kaname-mist{position:fixed;left:-8%;right:-8%;bottom:-3vh;height:42vh;z-index:0;pointer-events:none;opacity:.48;
+    background:
+      linear-gradient(153deg,transparent 0 42%,rgba(6,16,23,.8) 42.2% 52%,transparent 52.2%) 0 100%/34% 82% repeat-x,
+      linear-gradient(207deg,transparent 0 44%,rgba(12,29,40,.84) 44.2% 58%,transparent 58.2%) 8% 100%/42% 68% repeat-x,
+      radial-gradient(60% 48% at 20% 100%,rgba(184,169,127,.15),transparent 70%),
+      radial-gradient(54% 44% at 76% 106%,rgba(76,107,122,.36),transparent 72%);
+    filter:blur(5px)}
+  @media(max-width:760px){
+    .kaname-disc{width:168px;height:168px;right:-38px;top:28px}
+    .kaname-disc::before{font-size:52px}.kaname-disc::after{font-size:8px;line-height:8.5;letter-spacing:2em}
+    .kaname-grid{background-size:48px 48px;opacity:.19}
+  }
+
+  .wrap{max-width:680px;padding:104px 0 120px}
+  #intro{min-height:calc(100svh - 160px);display:flex;flex-direction:column;justify-content:center}
+  #intro.hidden{display:none}
+  .en{font-family:var(--serif);font-size:13px;letter-spacing:.42em;color:var(--accent2);margin-bottom:18px;
+    text-shadow:0 2px 12px rgba(0,0,0,.8)}
+  .kicker{font-size:13.5px;letter-spacing:.36em;color:var(--ink);margin-bottom:25px;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+  .kicker::before,.kicker::after{width:52px;background:linear-gradient(90deg,transparent,var(--accent))}
+  .kicker::after{background:linear-gradient(90deg,var(--accent),transparent)}
+  h1.title{font-size:46px;letter-spacing:.16em;color:var(--ink);-webkit-text-fill-color:initial;background:none;
+    text-shadow:0 2px 18px rgba(0,0,0,.8),0 0 38px rgba(203,167,90,.28)}
+  h1.title::after{content:"◇";display:block;font-size:13px;color:var(--accent2);margin-top:24px;letter-spacing:0;
+    text-shadow:0 0 16px rgba(231,206,142,.65)}
+  .lead{color:#D8CDAF;line-height:2.15;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+  .note-min{max-width:560px;margin-top:38px;padding:20px 22px;line-height:1.95;border-radius:6px;
+    color:#D7C9A3;background:rgba(13,27,37,.7);border-color:rgba(203,167,90,.26);
+    backdrop-filter:blur(9px);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+
+  .btn{position:relative;overflow:hidden;border-radius:4px;padding:17px 46px;letter-spacing:.16em;
+    background:rgba(10,23,32,.54);color:var(--ink);border-color:rgba(231,206,142,.55);
+    backdrop-filter:blur(5px);transition:.3s;text-shadow:none}
+  .btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.34),transparent);transform:skewX(-18deg)}
+  .btn:hover::after{animation:goldSheen 1.1s ease}
+  @keyframes goldSheen{to{left:140%}}
+  .btn-primary{background:linear-gradient(180deg,rgba(231,206,142,.98),rgba(203,167,90,.98));
+    border-color:#E7CE8E;color:#20180A;box-shadow:0 12px 34px rgba(0,0,0,.42),0 0 28px rgba(203,167,90,.14)}
+  .btn-primary:hover{background:linear-gradient(180deg,#F0DBA0,#D6B96C);border-color:#F0DBA0;
+    box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 34px rgba(203,167,90,.24)}
+  .btn-ghost{background:rgba(10,23,32,.6);color:var(--ink);border-color:rgba(203,167,90,.36)}
+  .mt40{margin-top:46px}
+
+  .birth-card,.res-card,.cta-main{border-radius:8px;border-color:rgba(203,167,90,.34);
+    background:linear-gradient(180deg,rgba(23,38,49,.91),rgba(8,20,29,.96));
+    backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.56),inset 0 1px 0 rgba(255,255,255,.055)}
+  .birth-card{padding:48px 28px}.birth-card .bh{font-size:20px;letter-spacing:.12em}.birth-card .bs{margin-bottom:30px}
+  .selrow label{font-family:var(--serif);font-size:12px;color:var(--accent2);letter-spacing:.24em;margin-bottom:9px}
+  select{min-width:90px;border:0;border-bottom:1px solid rgba(203,167,90,.58);border-radius:0;background:transparent;
+    padding:11px 10px;color:var(--ink)}
+  select:focus{border-bottom-color:var(--accent2)}select option{background:#13212B;color:var(--ink)}
+
+  .res-card{padding:52px 36px;text-align:left}
+  .res-card::before{inset:9px;border-radius:4px;background:radial-gradient(64% 36% at 50% -4%,rgba(231,206,142,.12),transparent 72%)}
+  .res-watermark{font-size:250px;color:rgba(203,167,90,.055);text-shadow:0 0 45px rgba(203,167,90,.05)}
+  .res-card>.en,.res-system,.res-name,.res-tag,.res-kan,.res-axes{text-align:center}
+  .res-system{font-size:13px;letter-spacing:.24em;color:var(--accent2);margin-top:8px}
+  .res-name{font-size:40px;margin-top:10px;text-shadow:0 2px 16px rgba(0,0,0,.8),0 0 28px rgba(203,167,90,.22)}
+  .res-tag{display:table;margin:16px auto 0;border-radius:999px;background:rgba(203,167,90,.11)}
+  .res-kan{margin-top:18px}.res-axes{font-size:13px;letter-spacing:.09em;color:#D4C49B}
+  .sec{margin-top:34px;padding-top:28px;border-color:rgba(203,167,90,.24)}
+  .sec h3{font-weight:600;font-size:17px;color:var(--ink);letter-spacing:.1em;margin-bottom:14px}
+  .sec h3 .dot{width:auto;height:auto;background:none;font-family:var(--serif);font-size:15px;color:var(--accent2);
+    letter-spacing:.16em;margin-right:7px}
+  .sec p{font-size:15.5px;line-height:2.1;color:#F4ECD8}
+  .res-step{margin-top:36px;padding:26px;border-radius:5px;background:linear-gradient(180deg,rgba(67,67,50,.6),rgba(37,42,37,.74));
+    border-color:rgba(231,206,142,.48);box-shadow:inset 0 0 32px rgba(203,167,90,.06),0 12px 32px rgba(0,0,0,.35)}
+  .res-step .sh{font-weight:600;font-size:16px;letter-spacing:.16em}.res-step .sh::before{content:"◇"}
+  .res-step p:not(.sh){font-size:15.5px;line-height:2.1}
+
+  .cta{margin-top:48px}.cta-bridge{color:var(--ink);letter-spacing:.24em}
+  .cta-bridge::after{width:1px;height:40px;margin:16px auto 24px;background:linear-gradient(180deg,var(--accent2),transparent)}
+  .cta-main{padding:42px 30px}.cta-eyebrow{letter-spacing:.16em;border-color:rgba(203,167,90,.42)}
+  .cta-main .h{font-size:21px;line-height:1.8}.cta-main .p{font-size:15px;line-height:2.05;color:#D8CDAF}
+  .cta-teaser{font-size:16px;line-height:2;border-radius:0 4px 4px 0;
+    background:linear-gradient(90deg,rgba(203,167,90,.18),rgba(203,167,90,.035))}
+  .cta-list li{font-size:14.5px;line-height:1.9}.cta-list li::before{content:"◇";font-size:10px;top:2px}
+  .disc{font-size:13px;line-height:2;border:1px solid rgba(203,167,90,.22);border-radius:6px;padding:26px 22px;
+    background:rgba(7,17,26,.82);backdrop-filter:blur(7px)}
+  .sign{color:#D4C49B;letter-spacing:.3em;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+  @media(max-width:560px){
+    .wrap{padding:82px 0 96px}#intro{min-height:calc(100svh - 120px)}h1.title{font-size:30px;letter-spacing:.1em}
+    .lead br{display:none}.note-min br{display:none}.btn{width:100%;padding:16px 22px}
+    .birth-card{padding:38px 18px}.selrow{gap:6px}.selrow .field{flex:1;min-width:76px}select{width:100%;min-width:0}
+    .res-card{padding:38px 20px}.res-name{font-size:29px}.res-watermark{font-size:160px}
+    .cta-main{padding:34px 20px}.cta-main .h{font-size:19px}.cta-main .p br{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){.kaname-disc{animation:none}.btn:hover::after{animation:none}}
 </style>
 </head>
 <body>
+<div class="kaname-grid" aria-hidden="true"></div>
+<div class="kaname-disc" aria-hidden="true"></div>
+<div class="kaname-mist" aria-hidden="true"></div>
 <div class="wrap">
 
   <!-- イントロ -->
@@ -158,7 +285,7 @@
     <p class="lead">生年月日を入れると、自分が「どんな素材でできているか」に加えて、<br>才能の「出方」と「勢い」までわかります。<br>
       当てない・煽らない・開運させない。性格じゃなく、構造で読む診断です。</p>
     <div class="center mt40">
-      <button class="btn btn-primary" onclick="toBirth()">診断をはじめる</button>
+      <button type="button" class="btn btn-primary" onclick="toBirth()">命式をひらく　›</button>
     </div>
     <p class="note-min">生まれた時間は聞きません。生年月日だけで確定する「日干（自分の核）」を読みます。<br>
       これは運勢占いではなく、自分の傾向を知るための「ものの見方のひとつ」です。</p>
@@ -175,7 +302,7 @@
         <div class="field"><label>日</label><select id="d"></select></div>
       </div>
       <div class="center mt28">
-        <button class="btn btn-primary" onclick="judge()">自分のタイプを見る</button>
+        <button type="button" class="btn btn-primary" onclick="judge()">自分の構造を読む　›</button>
       </div>
       <p class="err" id="err">生年月日を選んでください。</p>
     </div>
@@ -192,13 +319,13 @@
       <p class="res-kan serif" id="rKan"></p>
       <p class="res-axes" id="rAxes"></p>
 
-      <div class="sec"><h3><span class="dot"></span>あなたの素材</h3><p id="rTale"></p></div>
-      <div class="sec"><h3><span class="dot"></span>あなたの才能</h3><p id="rTalent"></p></div>
-      <div class="sec"><h3><span class="dot"></span>消耗するとき</h3><p id="rTired"></p></div>
-      <div class="sec"><h3><span class="dot"></span>扱い方・立て直し</h3><p id="rRecover"></p></div>
-      <div class="sec"><h3><span class="dot"></span>活きる場所</h3><p id="rEnv"></p></div>
-      <div class="sec"><h3><span class="dot"></span>才能の「出方」（通変星）</h3><p id="rDir"></p></div>
-      <div class="sec"><h3><span class="dot"></span>勢い・ペース配分（十二運）</h3><p id="rMom"></p></div>
+      <div class="sec"><h3><span class="dot">01</span>自分の素材</h3><p id="rTale"></p></div>
+      <div class="sec"><h3><span class="dot">02</span>自分の才能</h3><p id="rTalent"></p></div>
+      <div class="sec"><h3><span class="dot">03</span>消耗するとき</h3><p id="rTired"></p></div>
+      <div class="sec"><h3><span class="dot">04</span>扱い方・立て直し</h3><p id="rRecover"></p></div>
+      <div class="sec"><h3><span class="dot">05</span>活きる場所</h3><p id="rEnv"></p></div>
+      <div class="sec"><h3><span class="dot">06</span>才能の「出方」（通変星）</h3><p id="rDir"></p></div>
+      <div class="sec"><h3><span class="dot">07</span>勢い・ペース配分（十二運）</h3><p id="rMom"></p></div>
       <div class="res-step"><p class="sh serif">今日、踏み出せる一歩</p><p id="rStep"></p></div>
     </div>
 
@@ -223,8 +350,8 @@
     </div>
 
     <div class="share-row">
-      <button class="btn btn-ghost" onclick="saveImage()">結果を画像で保存</button>
-      <button class="btn btn-ghost" onclick="restart()">別の生年月日で調べる</button>
+      <button type="button" class="btn btn-ghost" onclick="saveImage()">結果を画像で保存</button>
+      <button type="button" class="btn btn-ghost" onclick="restart()">別の生年月日で調べる</button>
     </div>
 
     <p class="disc">この診断は、生年月日から「日干（自分の核）」を構造的に算出するものです。<br>
